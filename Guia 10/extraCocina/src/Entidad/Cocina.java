@@ -8,9 +8,31 @@
 
 package Entidad;
 
+import java.util.ArrayList;
+
 
 public class Cocina {
     
-    
+    private ArrayList <String> receta;
+
+    public Cocina(ArrayList<String> receta) {
+        this.receta = receta;
+    }
+
+    public Cocina() {
+    }
+
+    public ArrayList<String> getReceta() {
+        return receta;
+    }
+
+    public void setReceta(ArrayList<String> receta) {
+        this.receta = receta;
+    }
+
+    @Override
+    public String toString() {
+        return "Receta{" + "receta=" + receta + '}';
+    }
 
 }

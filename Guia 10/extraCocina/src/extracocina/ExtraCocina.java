@@ -7,11 +7,22 @@
 
 package extracocina;
 
+import Entidad.Cocina;
+import Servicio.ServicioCocina;
+import java.util.ArrayList;
+
 
 public class ExtraCocina {
 
     public static void main(String[] args) {
         
+        Cocina cocina = new Cocina();
+        ArrayList<String[]> receta = new ArrayList();
+        ServicioCocina servicio = new ServicioCocina();
+        
+        servicio.crearReceta(receta);
+        servicio.agregarReceta(receta);
+        servicio.mostrarReceta(receta);
         
         
     }
