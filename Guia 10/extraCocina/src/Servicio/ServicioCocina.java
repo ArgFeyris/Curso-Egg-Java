@@ -8,61 +8,76 @@
 
 package Servicio;
 
+import Entidad.Cocina;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ServicioCocina {
 
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
-
-    public ArrayList<String[]> crearReceta(ArrayList<String[]> recetario) {
-        String[] receta1 = new String[4];
-        receta1[0]="Receta para preparar Fideos hervidos";
-        receta1[1]="fideos";
-        receta1[2]="sal";
-        receta1[3]="manteca";
+    
+    public Cocina recetaPredeterminada(Cocina receta){
         
-        String[] receta2 = new String[4];
-        receta2[0]="Receta para preparar huevos fritos";
-        receta2[1]="huevos";
-        receta2[2]="sal";
-        receta2[3]="aceite";
+        String nombre = "Huevos Fritos";
+        ArrayList<String> aux = new ArrayList();
+        aux.add("huevos");
+        aux.add("sal");
+        aux.add("aceite");
+        receta.setIngredientes(aux);
         
-        recetario.add(receta1);
-        recetario.add(receta2);
-        return recetario;
+        return new Cocina(nombre, aux);
     }
 
-    public String[] agregarReceta(ArrayList<String[]> recetario) {
+    public void buscarReceta(Cocina receta, ArrayList<Cocina> recetario) {
+        System.out.println("Que ingrediente tiene?");
+        String ing = leer.next();
+        ArrayList<Cocina> aux1 = recetario;
+        ArrayList<String> aux = receta.getIngredientes();
+        boolean bandera = false;
+        for (Cocina recetas : aux1) {
+            for (String aux2 : aux) {
+            if (aux2.equalsIgnoreCase(ing)) {
+                bandera = true;
+                System.out.println(recetas);
+            }
+        }
+        }
+        
+        if (!bandera) {
+           System.out.println("No se encontraron recetas en la base de datos.");
+        }
+    }
+    
+    public void mostrarReceta(Cocina receta, ArrayList<Cocina> recetario ){
+        
+        for (Cocina recetas : recetario) {
+            System.out.println(recetas);
+        }
+    
+    }
 
-        System.out.println("¿Que receta desea agregar?");
+    public ArrayList<String> agregarIngredientes() {
+        ArrayList<String> ingredientes = new ArrayList();
+        String resp;
+        String ingrediente;
+        
+        do {
+           System.out.println("Agregue un ingrediente");
+           ingrediente = leer.next();
+           ingredientes.add(ingrediente);
+            
+            System.out.println("Desea agregar otro ingrediente? s/n");
+            resp = leer.next();
+            
+        } while (resp.equalsIgnoreCase("s"));
+        
+        return ingredientes;
+    }
+    
+    public Cocina crearReceta() {
+        System.out.println("Qué receta desea crear?");
         String nombre = leer.next();
-
-        System.out.println("¿Cuántos ingredientes necesita para prepararlo?");
-        int cantidad = leer.nextInt()+1;
-        String[] receta = new String[cantidad];
-        System.out.println("Agregue los ingredientes que se necesitan para"
-                + " preparar " + nombre);
-        receta[0]=("Receta para preparar "+nombre);
-        for (int i = 1; i < (cantidad); i++) {
-            receta[i]=leer.next();
-        }
-        recetario.add(receta);
-        
-        return receta;
-    }
-
-    public void buscarReceta() {
-
-    }
-    
-    public void mostrarReceta(ArrayList<String[]> receta){
-        
-        for (String[] strings : receta) {
-            System.out.println(Arrays.toString(strings));
-        }
-    
+        return new Cocina(nombre);
     }
 
 }

@@ -8,31 +8,53 @@
 
 package Entidad;
 
+import Servicio.ServicioCocina;
 import java.util.ArrayList;
 
 
 public class Cocina {
     
-    private ArrayList <String> receta;
-
-    public Cocina(ArrayList<String> receta) {
-        this.receta = receta;
-    }
+    ServicioCocina servicio = new ServicioCocina();
+    
+    private String nombreReceta;
+    
+    private ArrayList <String> ingredientes;
 
     public Cocina() {
     }
 
-    public ArrayList<String> getReceta() {
-        return receta;
+    public Cocina(String nombreReceta) {
+        this.nombreReceta = nombreReceta;
+        this.ingredientes = servicio.agregarIngredientes();
     }
 
-    public void setReceta(ArrayList<String> receta) {
-        this.receta = receta;
+    public Cocina(String nombreReceta, ArrayList<String> ingredientes) {
+        this.nombreReceta = nombreReceta;
+        this.ingredientes = ingredientes;
+    }
+    
+    
+
+    public String getNombreReceta() {
+        return nombreReceta;
+    }
+
+    public void setNombreReceta(String nombreReceta) {
+        this.nombreReceta = nombreReceta;
+    }
+
+    public ArrayList<String> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(ArrayList<String> ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
     @Override
     public String toString() {
-        return "Receta{" + "receta=" + receta + '}';
+        return "Cocina{" + "nombreReceta=" + nombreReceta + ", ingredientes=" + ingredientes + '}';
     }
-
+    
+    
 }
